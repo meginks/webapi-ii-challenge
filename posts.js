@@ -63,6 +63,22 @@ router.post('/', async (req, res) => {
 
 // PUT 
 
+router.put('/:id', async (req, res) => {
+    try {
+        checkID(req.params.id);
+        checkReqBody(req.body);
+        const post = await db.update(req.params.id, req.body); 
+        if (post) {
+            res.status(200)
+            .json(post)
+        } 
+    } catch (error) {
+        res.status(500)
+        .json({
+            message: `The post information could not be modified. Error: ${error}` 
+        })
+    }
+})
 
 
 // DELETE 
