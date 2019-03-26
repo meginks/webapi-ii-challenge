@@ -24,9 +24,9 @@ router.get('/', async (req, res) => {
 // GET POST BY ID
 
 router.get('/:id', async (req, res) => {
-    checkID(req.params.id); 
     try {
         const post = await db.findById(req.params.id); 
+        checkID(req.params.id); 
         if (post) {
             res.status(200)
             .json(post) 
@@ -49,6 +49,25 @@ router.get('/:id', async (req, res) => {
 
 
 // DELETE 
+
+router.delete('/:id', async (req, res) => {
+    try { 
+        checkID(req.params.id);
+        const deletedPost = await db.remove(req.params.id); 
+        if (deletedPost>0) {
+            res.status(200)
+            .json({
+                message: "The post was deleted."
+            })
+        } 
+    } catch (error) {
+        console.log("DELETE request error", error); 
+        res.status(500)
+        .json({
+            error: `This post could not be removed. Error: ${error}`
+        })
+    }
+})
 
 
 

@@ -1,10 +1,10 @@
 const checkID = (id) => {
     if (!id) {
+        return (
     res.status(404)
     .json({
-        success: false,
-        message: "The post with the specified ID does not exist."
-    })
+        error: "The post with the specified ID does not exist."
+          }) )
 } else {
     return id
 }
@@ -13,8 +13,7 @@ const checkID = (id) => {
 const checkReqBody = (res) => {
     return res.status(400) 
      .json({
-         success: false,
-         message: "Please provide title and contents for the post."
+         error: "Please provide title and contents for the post."
      })
 }
 
