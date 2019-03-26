@@ -69,7 +69,6 @@ router.put('/:id', async (req, res) => {
         checkReqBody(res); 
     } else try {
         checkID(req.params.id);
-        checkReqBody(req.body);
         const post = await db.update(req.params.id, req.body); 
         if (post) {
             res.status(200)
