@@ -46,8 +46,9 @@ router.get('/:id', async (req, res) => {
 // POST 
 
 router.post('/', async (req, res) => {
-    try {
-        checkReqBody(req.body); 
+    if (!req.body.title || !req.body.contents) {
+        checkReqBody(res); 
+    } else try {
         const post = await db.insert(req.body); 
         if (post) {
         res.status(201)
@@ -64,7 +65,9 @@ router.post('/', async (req, res) => {
 // PUT 
 
 router.put('/:id', async (req, res) => {
-    try {
+    if (!req.body.title || !req.body.contents) {
+        checkReqBody(res); 
+    } else try {
         checkID(req.params.id);
         checkReqBody(req.body);
         const post = await db.update(req.params.id, req.body); 
