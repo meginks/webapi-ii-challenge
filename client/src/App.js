@@ -19,7 +19,19 @@ class App extends Component {
         })
       )
       .catch(err => console.log(err))
-  }
+  } 
+
+  deletePost = (id) => {
+    axios
+    .delete(`http://localhost:4002/api/posts/${id}`) 
+    .then( res => {
+      this.setState({
+        posts: res.data
+      })
+    }) 
+    .catch( err => console.log(err))
+  }  
+
   render() {
     console.log("posts", this.state.posts);
     return (

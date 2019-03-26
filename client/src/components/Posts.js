@@ -1,5 +1,5 @@
 import React from 'react'; 
-
+import Post from './Post';
 
 const Posts = props => {
     console.log('posts props', props)
@@ -7,10 +7,7 @@ const Posts = props => {
         <div>
             {props.posts.map((post) => {
                 return (
-                <div key={post.id}>
-                <h1>{post.title}</h1>
-                <p>{post.contents}</p>
-                </div>
+                    <Post post={post} key={post.id} />
                 )
             })}
         </div>
