@@ -28,8 +28,10 @@ router.get('/:id', async (req, res) => {
         const post = await db.findById(req.params.id); 
         checkID(req.params.id); 
         if (post) {
+            return (
             res.status(200)
             .json(post) 
+            )
         } 
     } catch (error) {
         console.log("GET POST BY ID error", error);
@@ -43,6 +45,21 @@ router.get('/:id', async (req, res) => {
 
 // POST 
 
+router.post('/', async (req, res) => {
+    try {
+        checkReqBody(req.body); 
+        const post = await db.insert(req.body); 
+        if (post) {
+        res.status(201)
+        .json(post); 
+        }
+    } catch (error) {
+        res.status(500)
+        .json({
+            message: `There was an error while saving the post to the database ${error}`
+        })
+    }
+})
 
 // PUT 
 
