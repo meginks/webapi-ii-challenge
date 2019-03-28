@@ -11,7 +11,7 @@ server.use(cors());
 
 server.get('/', (req, res) => {
     res.send(`
-    <p>This is a test</p>
+    <p>Hello and welcome to my api.</p>
     `);
 }); 
 
